@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1002942888307",
+    "project_id": "magecode-2ded2",
+    "storage_bucket": "magecode-2ded2.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1002942888307:android:ed2703ba8ab53ba12aad06",
+        "android_client_info": {
+          "package_name": "com.kitsune.magecode"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1002942888307-eimjboe1i2ik0asdpcopk439am9dbv8j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCc1QX1ITrVgeaLl1f-L2C1VYoavXHcl4E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1002942888307-eimjboe1i2ik0asdpcopk439am9dbv8j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
