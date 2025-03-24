@@ -1,4 +1,4 @@
-package com.kitsune.magecode.ui.theme
+package com.kitsune.magecode.view.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
