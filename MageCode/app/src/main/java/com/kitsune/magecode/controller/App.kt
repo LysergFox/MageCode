@@ -51,7 +51,7 @@ class App : Application() {
                 todayLesson = Lesson(
                     id = "daily_${System.currentTimeMillis()}",
                     questions = selectedQuestions,
-                    xpReward = TODO()
+                    xpReward = 5
                 )
 
                 onComplete(todayLesson)

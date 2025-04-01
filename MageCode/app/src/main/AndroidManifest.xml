@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MageCode"
         tools:targetApi="31">
-        <activity android:name=".view.SplashActivity"
+        <activity android:name=".view.LoginActivity"
             android:theme="@style/Theme.MageCode.Splash"
             android:exported="true">
             <intent-filter>
@@ -21,7 +21,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.LoginActivity" android:theme="@style/Theme.MageCode" />
         <activity android:name=".view.DashboardActivity" android:theme="@style/Theme.MageCode"/>
         <meta-data
             android:name="com.google.android.gms.auth.api.signin.v2.CLIENT_ID"

@@ -7,12 +7,12 @@ plugins {
 
 android {
     namespace = "com.kitsune.magecode"
-    compileSdk = 35
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.kitsune.magecode"
         minSdk = 33
-        targetSdk = 35
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
@@ -55,6 +55,7 @@ dependencies {
     implementation(libs.play.services.auth)
     implementation(libs.firebase.firestore.ktx)
     implementation(libs.googleid)
+    implementation(libs.core.splashscreen)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -64,5 +65,6 @@ dependencies {
     debugImplementation(libs.androidx.ui.test.manifest)
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.appcompat.resources)
-    implementation (libs.material)
+    implementation(libs.material)
+    implementation(libs.androidx.core.splashscreen)
 }

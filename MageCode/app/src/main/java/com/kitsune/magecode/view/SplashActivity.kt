@@ -2,32 +2,30 @@ package com.kitsune.magecode.view
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
-import androidx.appcompat.app.AppCompatActivity
-import com.kitsune.magecode.R
-import com.kitsune.magecode.controller.App
+import androidx.activity.ComponentActivity
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.google.firebase.auth.FirebaseAuth
+import com.kitsune.magecode.controller.App
 
-class SplashActivity : AppCompatActivity() {
+class SplashActivity : ComponentActivity() {
 
-    private val splashDelay: Long = 1500 // 1.5 seconds to show logo/animation
-    private val appController = App.instance
     private val auth = FirebaseAuth.getInstance()
+    private val appController = App.instance
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_splash)
+        // ✅ Show system splash screen first
+        installSplashScreen()
 
-        Handler(Looper.getMainLooper()).postDelayed({
-            if (auth.currentUser != null) {
-                appController.loadUserData {
-                    goToDashboard()
-                }
-            } else {
-                goToLogin()
+        super.onCreate(savedInstanceState)
+
+        // ✅ Immediate logic - no manual delay needed
+        if (auth.currentUser != null) {
+            appController.loadUserData {
+                goToDashboard()
             }
-        }, splashDelay)
+        } else {
+            goToLogin()
+        }
     }
 
     private fun goToLogin() {
