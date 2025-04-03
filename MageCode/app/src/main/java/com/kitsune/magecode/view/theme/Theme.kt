@@ -1,6 +1,5 @@
-package com.kitsune.magecode.ui.theme
+package com.kitsune.magecode.view.theme
 
-import android.app.Activity
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme

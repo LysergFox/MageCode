@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_xp"
+        android:title="XP: 240"
+        android:enabled="false"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/action_level"
+        android:title="Lvl 5"
+        android:enabled="false"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/action_compendium"
+        android:icon="@drawable/ic_book"
+        android:title="Compendium"
+        app:showAsAction="ifRoom"
+        android:contentDescription="Compendium" />
+
+    <item
+        android:id="@+id/action_logout"
+        android:icon="@android:drawable/ic_lock_power_off"
+        android:title="Logout"
+        app:showAsAction="ifRoom"
+        android:contentDescription="Logout" />
+</menu>

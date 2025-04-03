@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_xp"
+        android:title="XP: 240"
+        android:enabled="false" />
+
+    <item
+        android:id="@+id/nav_level"
+        android:title="Level: 5"
+        android:enabled="false" />
+
+    <item
+        android:id="@+id/nav_compendium"
+        android:icon="@drawable/ic_book"
+        android:title="Compendium" />
+
+    <item
+        android:id="@+id/nav_logout"
+        android:icon="@android:drawable/ic_lock_power_off"
+        android:title="Logout" />
+</menu>

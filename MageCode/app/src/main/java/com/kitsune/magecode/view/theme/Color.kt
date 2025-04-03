@@ -1,4 +1,4 @@
-package com.kitsune.magecode.ui.theme
+package com.kitsune.magecode.view.theme
 
 import androidx.compose.ui.graphics.Color
 
