@@ -67,4 +67,5 @@ dependencies {
     implementation(libs.androidx.appcompat.resources)
     implementation(libs.material)
     implementation(libs.androidx.core.splashscreen)
+    implementation(libs.material3)
 }
