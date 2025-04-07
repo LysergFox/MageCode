@@ -12,9 +12,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MageCode"
+        android:localeConfig="@xml/locales_config"
         tools:targetApi="31">
         <activity android:name=".view.LoginActivity"
-            android:theme="@style/Theme.MageCode.Splash"
+            android:theme="@style/Theme.MageCode"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,6 +23,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".view.DashboardActivity" android:theme="@style/Theme.MageCode"/>
+        <activity android:name=".view.LessonActivity" android:theme="@style/Theme.MageCode"/>
+        <activity android:name=".view.ResultActivity" android:theme="@style/Theme.MageCode"/>
         <meta-data
             android:name="com.google.android.gms.auth.api.signin.v2.CLIENT_ID"
             android:value="@string/default_web_client_id" />

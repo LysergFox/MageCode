@@ -1,6 +1,7 @@
 plugins {
     id("com.android.application")
     id("com.google.gms.google-services")
+    id ("kotlin-parcelize")
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
 }
@@ -68,4 +69,5 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.core.splashscreen)
     implementation(libs.material3)
+    implementation(libs.gson)
 }

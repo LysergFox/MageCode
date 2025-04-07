@@ -39,7 +39,7 @@ class App : Application() {
     }
 
     fun generateTodayLesson(onComplete: (Lesson) -> Unit) {
-        val selectedLanguages = currentUser.selectedLanguages
+        val selectedLanguages = currentUser.selectedLanguages.map { it.lowercase() }
 
         db.collection("questions")
             .whereIn("language", selectedLanguages)

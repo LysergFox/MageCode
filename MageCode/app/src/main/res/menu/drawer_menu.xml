@@ -1,23 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <group android:checkableBehavior="none">
+        <item
+            android:id="@+id/nav_xp"
+            android:title="@string/xp"
+            android:enabled="false" />
 
-    <item
-        android:id="@+id/nav_xp"
-        android:title="XP: 240"
-        android:enabled="false" />
+        <item
+            android:id="@+id/nav_level"
+            android:title="@string/level"
+            android:enabled="false" />
 
-    <item
-        android:id="@+id/nav_level"
-        android:title="Level: 5"
-        android:enabled="false" />
+        <item
+            android:id="@+id/nav_compendium"
+            android:icon="@drawable/ic_book"
+            android:title="@string/compendium" />
 
-    <item
-        android:id="@+id/nav_compendium"
-        android:icon="@drawable/ic_book"
-        android:title="Compendium" />
+        <item
+            android:id="@+id/nav_logout"
+            android:icon="@android:drawable/ic_lock_power_off"
+            android:title="@string/logout" />
 
-    <item
-        android:id="@+id/nav_logout"
-        android:icon="@android:drawable/ic_lock_power_off"
-        android:title="Logout" />
+        <item
+            android:id="@+id/nav_spacer"
+            android:title=""
+            app:actionViewClass="android.view.View"
+            android:enabled="false" />
+
+        <item
+            android:id="@+id/nav_language_spinner"
+            android:title="@string/language"
+            app:actionViewClass="android.widget.Spinner"
+            android:orderInCategory="100" />
+    </group>
 </menu>

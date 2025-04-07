@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MageCode</string>
+    <string name="default_web_client_id">1002942888307-eimjboe1i2ik0asdpcopk439am9dbv8j.apps.googleusercontent.com</string>
+    <string name="navigation_drawer_open">Open</string>
+    <string name="navigation_drawer_close">Close</string>
+    <string name="start_lesson">Spustit denní lekci</string>
+    <string name="logout">Odhlásit se</string>
+    <string name="compendium">Kompendium</string>
+    <string name="xp">Zkušenosti</string>
+    <string name="level">Úroveň</string>
+    <string name="login_text">Přihlásit se do MageCode</string>
+    <string name="google_sign_in">Přihlásit se pomocí google účtu</string>
+    <string name="language">Jazyk:</string>
+    <string name="next_question">Další otázka</string>
+    <string name="fill_blank_hint">Zadejte svou odpověď...</string>
+    <string name="check">Zkontrolovat</string>
+    <string name="view_results">Výsledky</string>
+</resources>

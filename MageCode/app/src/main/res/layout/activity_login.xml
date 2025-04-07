@@ -7,8 +7,14 @@
     android:orientation="vertical"
     android:padding="24dp">
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/ic_launcher_foreground"
+        android:contentDescription="@string/app_name"/>
+
     <TextView
-        android:text="Sign in to MageCode"
+        android:text="@string/login_text"
         android:textSize="20sp"
         android:layout_marginBottom="32dp"
         android:layout_width="wrap_content"
@@ -18,8 +24,7 @@
         android:id="@+id/google_sign_in_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="SIGN IN WITH GOOGLE"
+        android:text="@string/google_sign_in"
         android:textAllCaps="true"
-        android:backgroundTint="@color/purple_500"
-        android:textColor="@android:color/white" />
+        style="@style/StoneButton"/>
 </LinearLayout>

@@ -2,6 +2,11 @@ package com.kitsune.magecode.view
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Button
+import android.widget.Spinner
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
@@ -11,7 +16,12 @@ import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.kitsune.magecode.R
 import com.kitsune.magecode.controller.App
+import com.kitsune.magecode.model.ResultManager
+import java.util.Locale
+import androidx.core.content.edit
+import com.kitsune.magecode.model.LessonLockManager
 
+@Suppress("DEPRECATION")
 class DashboardActivity : AppCompatActivity() {
     private val appController = App.instance
 
@@ -37,6 +47,34 @@ class DashboardActivity : AppCompatActivity() {
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
 
+        val spinnerItem = navView.menu.findItem(R.id.nav_language_spinner)
+        val spinner = spinnerItem.actionView as Spinner
+
+        val languageNames = resources.getStringArray(R.array.language_names)
+        val languageCodes = resources.getStringArray(R.array.language_codes)
+
+        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, languageNames)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinner.adapter = adapter
+
+        val sharedPref = getSharedPreferences("settings", MODE_PRIVATE)
+        val savedCode = sharedPref.getString("language", "en")
+        val selectedIndex = languageCodes.indexOf(savedCode)
+        spinner.setSelection(if (selectedIndex != -1) selectedIndex else 0)
+
+        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                val selectedCode = languageCodes[position]
+                val currentCode = sharedPref.getString("language", "")
+                if (selectedCode != currentCode) {
+                    sharedPref.edit { putString("language", selectedCode) }
+                    changeAppLocale(selectedCode)
+                }
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
+        }
+
         navView.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.nav_logout -> {
@@ -59,7 +97,48 @@ class DashboardActivity : AppCompatActivity() {
             menu.findItem(R.id.nav_level)?.title = "Level: ${appController.currentUser.level}"
         }
 
-        appController.generateTodayLesson {
+        val startLessonButton = findViewById<Button>(R.id.start_lesson_btn)
+
+        appController.generateTodayLesson { lesson ->
+            startLessonButton.setOnClickListener {
+                //if (LessonLockManager.hasCompletedLessonToday(this)) {
+                    Toast.makeText(this, "You've already completed today's lesson. Come back tomorrow!", Toast.LENGTH_SHORT).show()
+                //} else {
+                    LessonLockManager.saveTodayAsCompleted(this)
+                    ResultManager.clearResults(this)
+
+                    val intent = Intent(this, LessonActivity::class.java)
+                    intent.putExtra("lesson_id", lesson.id)
+                    startActivity(intent)
+                //}
+            }
+        }
+
+        val viewResultsBtn = findViewById<Button>(R.id.view_results_btn)
+
+        viewResultsBtn.setOnClickListener {
+            startActivity(Intent(this, ResultActivity::class.java))
         }
     }
+
+    private fun changeAppLocale(languageCode: String) {
+        val locale = Locale(languageCode)
+        Locale.setDefault(locale)
+        val config = resources.configuration
+        config.setLocale(locale)
+        resources.updateConfiguration(config, resources.displayMetrics)
+        recreate()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        updateResultsButton()
+    }
+
+    private fun updateResultsButton() {
+        val viewResultsBtn = findViewById<Button>(R.id.view_results_btn)
+        val hasResults = ResultManager.getSavedResults(this).isNotEmpty()
+        viewResultsBtn.visibility = if (hasResults) View.VISIBLE else View.GONE
+    }
+
 }
