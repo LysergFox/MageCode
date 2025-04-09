@@ -1,9 +1,10 @@
-package com.kitsune.magecode.model
+package com.kitsune.magecode.model.managers
 
 import android.content.Context
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
+import androidx.core.content.edit
 
 object LessonLockManager {
     private const val PREF_NAME = "lesson_lock"
@@ -18,7 +19,7 @@ object LessonLockManager {
 
     fun saveTodayAsCompleted(context: Context) {
         val prefs = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
-        prefs.edit().putString(KEY_LAST_LESSON_DATE, getCurrentDate()).apply()
+        prefs.edit() { putString(KEY_LAST_LESSON_DATE, getCurrentDate()) }
     }
 
     private fun getCurrentDate(): String {

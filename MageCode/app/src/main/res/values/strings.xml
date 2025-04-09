@@ -12,7 +12,49 @@
     <string name="google_sign_in">Sign in with Google account</string>
     <string name="language">Language:</string>
     <string name="next_question">Next question</string>
-    <string name="fill_blank_hint">Type your answer here...</string>
+    <string name="fill_blank_hint">Type your answer here…</string>
     <string name="check">Check</string>
     <string name="view_results">Results</string>
+    <string name="python">Python</string>
+    <string name="sql">SQL</string>
+    <string name="java">Java</string>
+    <string name="select_languages">Programming languages</string>
+    <string name="incorrect_match">Incorrect match</string>
+    <string name="answer_correct">✔ Correct!</string>
+    <string name="answer_incorrect">✖ Incorrect</string>
+    <string name="result_question">Q: %1$s</string>
+    <string name="result_your_answer">Your Answer: %1$s</string>
+    <string name="result_correct_answer">Correct Answer: %1$s</string>
+    <string name="result_correct">✔ Correct</string>
+    <string name="result_incorrect">✖ Incorrect</string>
+    <!--PYTHON-->
+    <string name="python_q_1_prompt">Which incantation defines a magical function in Python?</string>
+    <string name="python_q_1_opt_1">invoke spell():</string>
+    <string name="python_q_1_opt_2">magic_spell()</string>
+    <string name="python_q_1_opt_3">def cast_spell():</string>
+    <string name="python_q_1_opt_4">spell define()</string>
+    <string name="python_q_2_prompt">Arrange the ancient runes to cast a spell that prints "Hello!"</string>
+    <string name="python_q_2_opt_1">def</string>
+    <string name="python_q_2_opt_2">greet</string>
+    <string name="python_q_2_opt_3">():</string>
+    <string name="python_q_2_opt_4">indent</string>
+    <string name="python_q_2_opt_5">print("Hello!")</string>
+    <string name="python_q_3_prompt">Fill in the magic word to summon a message: \'Beware the bug!\'</string>
+    <string name="python_q_3_sentence">__(&quot;Beware the bug!&quot;)</string>
+    <string name="python_q_4_prompt">Match the arcane keywords to their spell effects</string>
+    <string name="python_q_4_key_1">def</string>
+    <string name="python_q_4_val_1">Opens a portal to a new function</string>
+    <string name="python_q_4_key_2">if</string>
+    <string name="python_q_4_val_2">Casts a conditional hex</string>
+    <string name="python_q_4_key_3">for</string>
+    <string name="python_q_4_val_3">Loops through a magical list</string>
+    <string name="python_q_5_prompt">Which spell would summon a new variable with a sword name?</string>
+    <string name="python_q_5_opt_1">new_var = &quot;sword&quot;</string>
+    <string name="python_q_5_opt_2">int sword = &quot;Excalibur&quot;</string>
+    <string name="python_q_5_opt_3">weapon = &quot;Excalibur&quot;</string>
+    <string name="python_q_5_opt_4">define sword(&quot;Excalibur&quot;)</string>
+    <string name="completed_today">You\'ve already completed today\'s lesson. Come back tomorrow!</string>
+    <string name="error">Error:</string>
+    <string name="saved_languages">Saved learning languages</string>
+    <string name="lesson_completed">Lesson Complete!</string>
 </resources>

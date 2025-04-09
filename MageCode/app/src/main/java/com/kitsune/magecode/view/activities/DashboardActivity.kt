@@ -1,4 +1,4 @@
-package com.kitsune.magecode.view
+package com.kitsune.magecode.view.activities
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,8 +6,9 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Button
+import android.widget.CheckBox
+import android.widget.LinearLayout
 import android.widget.Spinner
-import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
@@ -16,10 +17,12 @@ import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.kitsune.magecode.R
 import com.kitsune.magecode.controller.App
-import com.kitsune.magecode.model.ResultManager
+import com.kitsune.magecode.model.managers.ResultManager
 import java.util.Locale
 import androidx.core.content.edit
-import com.kitsune.magecode.model.LessonLockManager
+import com.kitsune.magecode.model.managers.LessonLockManager
+import com.kitsune.magecode.view.CustomComponents
+import androidx.core.view.isVisible
 
 @Suppress("DEPRECATION")
 class DashboardActivity : AppCompatActivity() {
@@ -32,7 +35,6 @@ class DashboardActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dashboard)
-
         drawerLayout = findViewById(R.id.drawer_layout)
         navView = findViewById(R.id.navigation_view)
         toolbar = findViewById(R.id.topAppBar)
@@ -75,6 +77,57 @@ class DashboardActivity : AppCompatActivity() {
             override fun onNothingSelected(parent: AdapterView<*>?) {}
         }
 
+        val languageChooserView = navView.menu.findItem(R.id.nav_language_select).actionView
+
+        val pythonCheck = languageChooserView?.findViewById<CheckBox>(R.id.python_checkbox)
+        val javaCheck = languageChooserView?.findViewById<CheckBox>(R.id.java_checkbox)
+        val sqlCheck = languageChooserView?.findViewById<CheckBox>(R.id.sql_checkbox)
+
+        val toggleText = languageChooserView?.findViewById<View>(R.id.language_toggle)
+        val checkboxGroup = languageChooserView?.findViewById<LinearLayout>(R.id.language_checkboxes)
+
+        toggleText?.setOnClickListener {
+            checkboxGroup?.let {
+                val visible = it.isVisible
+                it.visibility = if (visible) View.GONE else View.VISIBLE
+            }
+        }
+
+        appController.loadUserData {
+            val selected = appController.currentUser.selectedLanguages
+            pythonCheck?.isChecked = "Python" in selected
+            javaCheck?.isChecked = "Java" in selected
+            sqlCheck?.isChecked = "SQL" in selected
+
+            val menu = navView.menu
+            menu.findItem(R.id.nav_xp)?.title = "XP: ${appController.currentUser.xp}"
+            menu.findItem(R.id.nav_level)?.title = "Level: ${appController.currentUser.level}"
+        }
+
+        val saveSelection = {
+            val newLanguages = listOfNotNull(
+                if (pythonCheck?.isChecked == true) "Python" else null,
+                if (javaCheck?.isChecked == true) "Java" else null,
+                if (sqlCheck?.isChecked == true) "SQL" else null
+            )
+
+            appController.userRepo.updateLanguages(
+                newLanguages,
+                onSuccess = {
+                    //Toast.makeText(this, "Saved learning languages", Toast.LENGTH_SHORT).show()
+                    CustomComponents.showStoneToast(this,getString(R.string.saved_languages))
+                },
+                onFailure = { error ->
+                    //Toast.makeText(this, "Error: $error", Toast.LENGTH_SHORT).show()
+                    CustomComponents.showStoneToast(this,"Error: $error")
+                }
+            )
+        }
+
+        pythonCheck?.setOnCheckedChangeListener { _, _ -> saveSelection() }
+        javaCheck?.setOnCheckedChangeListener { _, _ -> saveSelection() }
+        sqlCheck?.setOnCheckedChangeListener { _, _ -> saveSelection() }
+
         navView.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.nav_logout -> {
@@ -84,38 +137,28 @@ class DashboardActivity : AppCompatActivity() {
                     true
                 }
                 R.id.nav_compendium -> {
-                    Toast.makeText(this, "Opening Compendium...", Toast.LENGTH_SHORT).show()
+                    CustomComponents.showStoneToast(this,"Opening Compendium...")
                     true
                 }
                 else -> false
             }
         }
 
-        appController.loadUserData {
-            val menu = navView.menu
-            menu.findItem(R.id.nav_xp)?.title = "XP: ${appController.currentUser.xp}"
-            menu.findItem(R.id.nav_level)?.title = "Level: ${appController.currentUser.level}"
-        }
-
         val startLessonButton = findViewById<Button>(R.id.start_lesson_btn)
 
         appController.generateTodayLesson { lesson ->
             startLessonButton.setOnClickListener {
-                //if (LessonLockManager.hasCompletedLessonToday(this)) {
-                    Toast.makeText(this, "You've already completed today's lesson. Come back tomorrow!", Toast.LENGTH_SHORT).show()
-                //} else {
-                    LessonLockManager.saveTodayAsCompleted(this)
-                    ResultManager.clearResults(this)
+                CustomComponents.showStoneToast(this,getString(R.string.completed_today))
+                LessonLockManager.saveTodayAsCompleted(this)
+                ResultManager.clearResults(this)
 
-                    val intent = Intent(this, LessonActivity::class.java)
-                    intent.putExtra("lesson_id", lesson.id)
-                    startActivity(intent)
-                //}
+                val intent = Intent(this, LessonActivity::class.java)
+                intent.putExtra("lesson_id", lesson.id)
+                startActivity(intent)
             }
         }
 
         val viewResultsBtn = findViewById<Button>(R.id.view_results_btn)
-
         viewResultsBtn.setOnClickListener {
             startActivity(Intent(this, ResultActivity::class.java))
         }
@@ -140,5 +183,5 @@ class DashboardActivity : AppCompatActivity() {
         val hasResults = ResultManager.getSavedResults(this).isNotEmpty()
         viewResultsBtn.visibility = if (hasResults) View.VISIBLE else View.GONE
     }
-
 }
+

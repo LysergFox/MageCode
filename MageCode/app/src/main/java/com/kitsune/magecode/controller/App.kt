@@ -7,6 +7,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.kitsune.magecode.model.Account
 import com.kitsune.magecode.model.lesson.Lesson
 import com.kitsune.magecode.model.lesson.Question
+import com.kitsune.magecode.model.repository.AccountRepository
 
 class App : Application() {
     companion object {
@@ -19,6 +20,9 @@ class App : Application() {
 
     val auth: FirebaseAuth by lazy { FirebaseAuth.getInstance() }
     val db: FirebaseFirestore by lazy { FirebaseFirestore.getInstance() }
+
+    val userRepo: AccountRepository
+        get() = AccountRepository(db, auth.currentUser?.uid ?: "")
 
     override fun onCreate() {
         super.onCreate()

@@ -1,10 +1,11 @@
 package com.kitsune.magecode.controller
 
+import android.annotation.SuppressLint
 import android.content.Context
 import com.kitsune.magecode.model.enums.QuestionType
 import com.kitsune.magecode.model.lesson.AnswerResult
 import com.kitsune.magecode.model.lesson.Question
-import com.kitsune.magecode.model.ResultManager
+import com.kitsune.magecode.model.managers.ResultManager
 
 class QuestionController(
     private val context: Context,
@@ -13,7 +14,10 @@ class QuestionController(
 
     fun checkAnswer(question: Question, userInput: Any): Boolean {
         val isCorrect = when (question.type) {
-            QuestionType.MULTIPLE_CHOICE -> userInput == question.correctAnswer
+            QuestionType.MULTIPLE_CHOICE -> {
+                val correctAnswers = question.correctAnswer.map { getLocalizedString(it) }
+                correctAnswers.contains(userInput)
+            }
             QuestionType.FILL_IN_THE_BLANK -> {
                 val input = userInput as? String
                 val correct = question.correctAnswer.firstOrNull()
@@ -31,5 +35,13 @@ class QuestionController(
 
         onAnswerChecked(isCorrect)
         return isCorrect
+    }
+
+
+    @SuppressLint("DiscouragedApi")
+    private fun getLocalizedString(key: String?): String {
+        if (key.isNullOrEmpty()) return ""
+        val resId = context.resources.getIdentifier(key, "string", context.packageName)
+        return if (resId != 0) context.getString(resId) else key
     }
 }

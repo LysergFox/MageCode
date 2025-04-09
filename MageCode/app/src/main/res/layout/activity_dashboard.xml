@@ -5,7 +5,7 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.DashboardActivity">
+    tools:context=".view.activities.DashboardActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -29,14 +29,14 @@
             android:orientation="vertical"
             android:padding="24dp">
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/start_lesson_btn"
                 style="@style/StoneButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/start_lesson" />
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/view_results_btn"
                 style="@style/StoneButton"
                 android:layout_width="match_parent"

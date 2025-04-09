@@ -11,6 +11,4 @@ data class Account(
     val lastActive: Date = Date(),
     val selectedLanguages: List<String>,
     val level: Int
-){
-    constructor() : this("", "", "", 0, 0, Date(), listOf(), 0)
-}
+)

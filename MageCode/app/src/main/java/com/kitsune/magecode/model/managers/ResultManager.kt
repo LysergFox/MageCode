@@ -1,4 +1,4 @@
-package com.kitsune.magecode.model
+package com.kitsune.magecode.model.managers
 
 import android.content.Context
 import com.google.common.reflect.TypeToken
@@ -20,8 +20,10 @@ object ResultManager {
     fun getSavedResults(context: Context): List<AnswerResult> {
         val prefs = context.getSharedPreferences("settings", Context.MODE_PRIVATE)
         val json = prefs.getString(KEY_RESULTS, null) ?: return emptyList()
+
+        val gson = Gson()
         val type = object : TypeToken<List<AnswerResult>>() {}.type
-        return Gson().fromJson(json, type)
+        return gson.fromJson(json, type)
     }
 
     fun clearResults(context: Context) {

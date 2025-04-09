@@ -13,6 +13,11 @@
             android:enabled="false" />
 
         <item
+            android:id="@+id/nav_language_select"
+            android:title=""
+            app:actionLayout="@layout/language_chooser" />
+
+        <item
             android:id="@+id/nav_compendium"
             android:icon="@drawable/ic_book"
             android:title="@string/compendium" />
@@ -21,12 +26,6 @@
             android:id="@+id/nav_logout"
             android:icon="@android:drawable/ic_lock_power_off"
             android:title="@string/logout" />
-
-        <item
-            android:id="@+id/nav_spacer"
-            android:title=""
-            app:actionViewClass="android.view.View"
-            android:enabled="false" />
 
         <item
             android:id="@+id/nav_language_spinner"

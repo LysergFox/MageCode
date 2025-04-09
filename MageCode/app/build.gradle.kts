@@ -8,11 +8,12 @@ plugins {
 
 android {
     namespace = "com.kitsune.magecode"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.kitsune.magecode"
         minSdk = 33
+        //noinspection OldTargetApi
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -70,4 +71,6 @@ dependencies {
     implementation(libs.androidx.core.splashscreen)
     implementation(libs.material3)
     implementation(libs.gson)
+    implementation(libs.ui)
+    implementation(libs.androidx.navigation.compose)
 }

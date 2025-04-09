@@ -1,4 +1,4 @@
-package com.kitsune.magecode.view
+package com.kitsune.magecode.view.activities
 
 import android.content.Intent
 import android.os.Bundle
