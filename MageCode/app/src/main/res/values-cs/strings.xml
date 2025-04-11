@@ -36,7 +36,7 @@
     <string name="python_q_2_opt_5">print(Hello!)</string>
     <string name="python_q_3_prompt">Doplň magické slovo pro vyvolání zprávy: \'Beware the bug!\'</string>
     <string name="python_q_3_sentence">__(&quot;Beware the bug!&quot;)</string>
-    <string name="python_q_4_prompt">Match the arcane keywords to their spell effects</string>
+    <string name="python_q_4_prompt">Přiřaďte klíčová slova kouzel k jejich účinkům.</string>
     <string name="python_q_4_key_1">def</string>
     <string name="python_q_4_val_1">Otevře portál k nové funkci</string>
     <string name="python_q_4_key_2">if</string>
