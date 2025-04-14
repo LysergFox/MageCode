@@ -100,8 +100,9 @@ class DashboardActivity : AppCompatActivity() {
             sqlCheck?.isChecked = "SQL" in selected
 
             val menu = navView.menu
-            menu.findItem(R.id.nav_xp)?.title = "XP: ${appController.currentUser.xp}"
-            menu.findItem(R.id.nav_level)?.title = "Level: ${appController.currentUser.level}"
+            menu.findItem(R.id.nav_xp)?.title = "${appController.currentUser.xp}"
+            menu.findItem(R.id.nav_level)?.title = "${appController.currentUser.level}"
+            menu.findItem(R.id.nav_streak)?.title = "${appController.currentUser.streak}"
         }
 
         val saveSelection = {
@@ -114,11 +115,9 @@ class DashboardActivity : AppCompatActivity() {
             appController.userRepo.updateLanguages(
                 newLanguages,
                 onSuccess = {
-                    //Toast.makeText(this, "Saved learning languages", Toast.LENGTH_SHORT).show()
                     CustomComponents.showStoneToast(this,getString(R.string.saved_languages))
                 },
                 onFailure = { error ->
-                    //Toast.makeText(this, "Error: $error", Toast.LENGTH_SHORT).show()
                     CustomComponents.showStoneToast(this,"Error: $error")
                 }
             )
@@ -144,6 +143,8 @@ class DashboardActivity : AppCompatActivity() {
             }
         }
 
+        navView.itemIconTintList = null;
+
         val startLessonButton = findViewById<Button>(R.id.start_lesson_btn)
 
         appController.generateTodayLesson { lesson ->
@@ -161,6 +162,26 @@ class DashboardActivity : AppCompatActivity() {
         val viewResultsBtn = findViewById<Button>(R.id.view_results_btn)
         viewResultsBtn.setOnClickListener {
             startActivity(Intent(this, ResultActivity::class.java))
+        }
+
+        navView.setNavigationItemSelectedListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.nav_logout -> {
+                    FirebaseAuth.getInstance().signOut()
+                    startActivity(Intent(this, LoginActivity::class.java))
+                    finish()
+                    true
+                }
+                R.id.nav_compendium -> {
+                    CustomComponents.showStoneToast(this, "Opening Compendium...")
+                    true
+                }
+                R.id.nav_scoreboard -> {
+                    startActivity(Intent(this, ScoreboardActivity::class.java))
+                    true
+                }
+                else -> false
+            }
         }
     }
 

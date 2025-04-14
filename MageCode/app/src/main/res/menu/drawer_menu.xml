@@ -1,16 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <group android:checkableBehavior="none">
+    <group android:checkableBehavior="none"
+        android:fontFamily="@font/compaspro">
         <item
             android:id="@+id/nav_xp"
-            android:title="@string/xp"
-            android:enabled="false" />
+            android:icon="@drawable/xp"
+            android:title="@string/xp" />
 
         <item
             android:id="@+id/nav_level"
-            android:title="@string/level"
-            android:enabled="false" />
+            android:icon="@drawable/level"
+            android:title="@string/level" />
+
+        <item
+            android:id="@+id/nav_streak"
+            android:icon="@drawable/streak"
+            android:title="@string/streak" />
 
         <item
             android:id="@+id/nav_language_select"
@@ -19,12 +25,17 @@
 
         <item
             android:id="@+id/nav_compendium"
-            android:icon="@drawable/ic_book"
+            android:icon="@drawable/compendium"
             android:title="@string/compendium" />
 
         <item
+            android:id="@+id/nav_scoreboard"
+            android:icon="@drawable/scoreboard"
+            android:title="@string/scoreboard" />
+
+        <item
             android:id="@+id/nav_logout"
-            android:icon="@android:drawable/ic_lock_power_off"
+            android:icon="@drawable/exit"
             android:title="@string/logout" />
 
         <item

@@ -103,7 +103,7 @@ class ResultActivity : AppCompatActivity() {
                         val value = it["second"]?.toString() ?: ""
                         "${getStringByKey(key)} = ${getStringByKey(value)}"
                     }
-                    else -> it.toString()
+                    else -> getStringByKey(it.toString())
                 }
             }
             is Map<*, *> -> answer.entries.joinToString(", ") {
