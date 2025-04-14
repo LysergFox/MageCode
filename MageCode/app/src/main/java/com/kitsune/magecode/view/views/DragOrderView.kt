@@ -8,10 +8,11 @@ import android.view.DragEvent
 import android.view.Gravity
 import android.widget.*
 import androidx.core.graphics.toColorInt
+import com.kitsune.magecode.R
 import com.kitsune.magecode.controller.QuestionController
 import com.kitsune.magecode.model.lesson.Question
 
-@SuppressLint("ViewConstructor")
+@SuppressLint("ViewConstructor", "UseCompatLoadingForDrawables")
 class DragOrderView(
     context: Context,
     private val question: Question,
@@ -25,19 +26,23 @@ class DragOrderView(
 
     init {
         orientation = VERTICAL
-        setPadding(24, 24, 24, 24)
+        setPadding(32, 32, 32, 32)
+        background = context.getDrawable(R.drawable.lesson_background)
 
         val promptText = TextView(context).apply {
             text = getStringByKey(question.prompt)
-            textSize = 18f
-            setPadding(0, 0, 0, 16)
+            applyTextOutline(this)
+            textSize = 20f
+            setPadding(16, 16, 16, 32)
+            setTextColor(resources.getColor(R. color. white))
+            typeface = resources.getFont(R.font.compaspro)
         }
         addView(promptText)
 
         dropArea = LinearLayout(context).apply {
             orientation = HORIZONTAL
             gravity = Gravity.CENTER
-            background = context.getDrawable(android.R.drawable.dialog_holo_light_frame)
+            background = context.getDrawable(R.drawable.stone_button)
             setPadding(16, 16, 16, 16)
         }
         dropArea.setOnDragListener(createDropListener(dropArea))
@@ -46,22 +51,25 @@ class DragOrderView(
         optionsLayout = LinearLayout(context).apply {
             orientation = HORIZONTAL
             gravity = Gravity.CENTER
-            setPadding(16, 16, 16, 16)
+            setPadding(16, 32, 16, 16)
         }
         optionsLayout.setOnDragListener(createDropListener(optionsLayout))
 
+        // Render the options
         question.options.forEach { key ->
-            val localizedText = getStringByKey(key)
-            keyMap[localizedText] = key
-            val view = createDraggableText(localizedText)
+            val localized = getStringByKey(key)
+            keyMap[localized] = key
+            val view = createDraggableText(localized)
             optionsLayout.addView(view)
         }
         addView(optionsLayout)
 
-        val submit = Button(context).apply {
-            text = context.getString(com.kitsune.magecode.R.string.check)
-            setBackgroundColor("#6200EE".toColorInt())
+        val submitButton = Button(context).apply {
+            text = context.getString(R.string.check)
+            background = context.getDrawable(R.drawable.stone_button)
             setTextColor(Color.WHITE)
+            textSize = 16f
+            setPadding(32, 16, 32, 16)
             setOnClickListener { btn ->
                 val answerKeys = (0 until dropArea.childCount).mapNotNull {
                     val text = (dropArea.getChildAt(it) as? TextView)?.text?.toString()
@@ -72,7 +80,7 @@ class DragOrderView(
 
                 for (i in 0 until dropArea.childCount) {
                     val child = dropArea.getChildAt(i) as? TextView ?: continue
-                    child.setBackgroundColor(if (isCorrect) Color.GREEN else Color.RED)
+                    child.setBackgroundColor(if (isCorrect) resources.getColor(R.color.green_500) else resources.getColor(R.color.red_500))
                     child.isEnabled = false
                 }
 
@@ -85,7 +93,7 @@ class DragOrderView(
                 btn.isEnabled = false
             }
         }
-        addView(submit)
+        addView(submitButton)
     }
 
     private fun getStringByKey(key: String): String {
@@ -96,10 +104,12 @@ class DragOrderView(
     private fun createDraggableText(text: String): TextView {
         return TextView(context).apply {
             this.text = text
+            applyTextOutline(this)
             textSize = 16f
+            setTextColor(resources.getColor(R.color.white))
+            background = context.getDrawable(R.drawable.stone_button)
+            typeface = resources.getFont(R.font.compaspro)
             setPadding(24, 16, 24, 16)
-            setBackgroundResource(android.R.drawable.btn_default)
-            setTextColor(Color.BLACK)
 
             val params = MarginLayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT)
             params.setMargins(12, 12, 12, 12)
@@ -107,7 +117,7 @@ class DragOrderView(
 
             setOnLongClickListener {
                 val clipData = ClipData.newPlainText("label", this.text)
-                this.startDragAndDrop(clipData, DragShadowBuilder(this), this, 0)
+                startDragAndDrop(clipData, DragShadowBuilder(this), this, 0)
                 true
             }
         }
@@ -116,7 +126,6 @@ class DragOrderView(
     private fun createDropListener(targetLayout: LinearLayout): OnDragListener {
         return OnDragListener { _, event ->
             if (!dragEnabled) return@OnDragListener true
-
             when (event.action) {
                 DragEvent.ACTION_DROP -> {
                     val draggedView = event.localState as? TextView ?: return@OnDragListener true
@@ -128,4 +137,9 @@ class DragOrderView(
             true
         }
     }
+
+    private fun applyTextOutline(textView: TextView) {
+        textView.setShadowLayer(3f, 0f, 0f, resources.getColor(R.color.black))
+    }
 }
+

@@ -4,8 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
 import android.view.Gravity
-import android.widget.LinearLayout
-import android.widget.TextView
+import android.widget.*
 import androidx.core.graphics.drawable.toDrawable
 import com.kitsune.magecode.R
 import com.kitsune.magecode.controller.QuestionController
@@ -28,13 +27,17 @@ class MatchPairsView(
 
     init {
         orientation = VERTICAL
-        setPadding(24, 24, 24, 24)
+        setPadding(32, 32, 32, 32)
+        background = context.getDrawable(R.drawable.lesson_background)
 
         val promptText = TextView(context).apply {
             text = getLocalizedString(question.prompt)
-            textSize = 18f
-            setPadding(8, 8, 8, 16)
+            textSize = 20f
+            setPadding(8, 8, 8, 24)
             gravity = Gravity.CENTER
+            setTextColor(Color.WHITE)
+            typeface = resources.getFont(R.font.compaspro)
+            setShadowLayer(3f, 0f, 0f, Color.BLACK)
         }
         addView(promptText)
 
@@ -45,11 +48,13 @@ class MatchPairsView(
         val leftColumn = LinearLayout(context).apply {
             orientation = VERTICAL
             layoutParams = LayoutParams(0, LayoutParams.WRAP_CONTENT, 1f)
+            gravity = Gravity.CENTER
         }
 
         val rightColumn = LinearLayout(context).apply {
             orientation = VERTICAL
             layoutParams = LayoutParams(0, LayoutParams.WRAP_CONTENT, 1f)
+            gravity = Gravity.CENTER
         }
 
         val pairs = question.pairs ?: emptyList()
@@ -73,14 +78,19 @@ class MatchPairsView(
         addView(container)
     }
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     private fun createSelectableItem(displayText: String, isLeft: Boolean, originalKey: String): TextView {
         return TextView(context).apply {
-            tag = originalKey // Store raw key
+            tag = originalKey
             text = displayText
             textSize = 16f
-            setPadding(16, 16, 16, 16)
-            background = Color.LTGRAY.toDrawable()
-            setTextColor(Color.BLACK)
+            setTextColor(Color.WHITE)
+            gravity = Gravity.CENTER
+            typeface = resources.getFont(R.font.compaspro)
+            setShadowLayer(3f, 0f, 0f, Color.BLACK)
+            background = context.getDrawable(R.drawable.stone_button)
+            setPadding(24, 16, 24, 16)
+
             val lp = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
             lp.setMargins(8, 8, 8, 8)
             layoutParams = lp
@@ -99,14 +109,14 @@ class MatchPairsView(
 
                     if (isCorrect) {
                         matched.add(Pair(leftRaw, rightRaw))
-                        selectedLeft!!.background = Color.GREEN.toDrawable()
-                        selectedRight!!.background = Color.GREEN.toDrawable()
+                        selectedLeft!!.background = context.getDrawable(R.drawable.option_correct)
+                        selectedRight!!.background = context.getDrawable(R.drawable.option_correct)
                         selectedLeft!!.isClickable = false
                         selectedRight!!.isClickable = false
                     } else {
                         customComponents.showStoneToast(context, context.getString(R.string.incorrect_match))
-                        selectedLeft!!.background = Color.LTGRAY.toDrawable()
-                        selectedRight!!.background = Color.LTGRAY.toDrawable()
+                        selectedLeft!!.background = context.getDrawable(R.drawable.stone_button)
+                        selectedRight!!.background = context.getDrawable(R.drawable.stone_button)
                     }
 
                     selectedLeft = null
@@ -120,23 +130,25 @@ class MatchPairsView(
         }
     }
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     private fun handleLeftSelection(view: TextView) {
         if (selectedLeft == view) {
             selectedLeft = null
-            view.background = Color.LTGRAY.toDrawable()
+            view.background = context.getDrawable(R.drawable.stone_button)
         } else {
-            selectedLeft?.background = Color.LTGRAY.toDrawable()
+            selectedLeft?.background = context.getDrawable(R.drawable.stone_button)
             selectedLeft = view
             view.background = Color.YELLOW.toDrawable()
         }
     }
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     private fun handleRightSelection(view: TextView) {
         if (selectedRight == view) {
             selectedRight = null
-            view.background = Color.LTGRAY.toDrawable()
+            view.background = context.getDrawable(R.drawable.stone_button)
         } else {
-            selectedRight?.background = Color.LTGRAY.toDrawable()
+            selectedRight?.background = context.getDrawable(R.drawable.stone_button)
             selectedRight = view
             view.background = Color.YELLOW.toDrawable()
         }

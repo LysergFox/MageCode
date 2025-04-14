@@ -127,22 +127,6 @@ class DashboardActivity : AppCompatActivity() {
         javaCheck?.setOnCheckedChangeListener { _, _ -> saveSelection() }
         sqlCheck?.setOnCheckedChangeListener { _, _ -> saveSelection() }
 
-        navView.setNavigationItemSelectedListener { menuItem ->
-            when (menuItem.itemId) {
-                R.id.nav_logout -> {
-                    FirebaseAuth.getInstance().signOut()
-                    startActivity(Intent(this, LoginActivity::class.java))
-                    finish()
-                    true
-                }
-                R.id.nav_compendium -> {
-                    CustomComponents.showStoneToast(this,"Opening Compendium...")
-                    true
-                }
-                else -> false
-            }
-        }
-
         navView.itemIconTintList = null;
 
         val startLessonButton = findViewById<Button>(R.id.start_lesson_btn)
@@ -173,7 +157,9 @@ class DashboardActivity : AppCompatActivity() {
                     true
                 }
                 R.id.nav_compendium -> {
-                    CustomComponents.showStoneToast(this, "Opening Compendium...")
+                    val intent = Intent(this, WebViewActivity::class.java)
+                    intent.putExtra("url", "https://www.w3schools.com")
+                    startActivity(intent)
                     true
                 }
                 R.id.nav_scoreboard -> {
