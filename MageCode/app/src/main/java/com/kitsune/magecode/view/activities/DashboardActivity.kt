@@ -183,6 +183,16 @@ class DashboardActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         updateResultsButton()
+        refreshDrawerUserStats()
+    }
+
+    private fun refreshDrawerUserStats() {
+        val menu = navView.menu
+        val user = appController.currentUser
+
+        menu.findItem(R.id.nav_xp)?.title = "${user.xp}"
+        menu.findItem(R.id.nav_level)?.title = "${user.level}"
+        menu.findItem(R.id.nav_streak)?.title = "${user.streak}"
     }
 
     private fun updateResultsButton() {

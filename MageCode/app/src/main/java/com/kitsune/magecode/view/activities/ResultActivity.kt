@@ -1,8 +1,6 @@
 package com.kitsune.magecode.view.activities
 
 import android.annotation.SuppressLint
-import android.graphics.Color
-import android.graphics.Typeface
 import android.os.Bundle
 import android.util.Log
 import android.view.ViewGroup
@@ -12,7 +10,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.kitsune.magecode.R
 import com.kitsune.magecode.model.managers.ResultManager
 import com.google.android.material.card.MaterialCardView
-import androidx.core.graphics.toColorInt
 import com.kitsune.magecode.model.lesson.KeyValuePair
 
 class ResultActivity : AppCompatActivity() {
@@ -36,8 +33,8 @@ class ResultActivity : AppCompatActivity() {
                 setCardElevation(dpToPx(4).toFloat())
                 radius = dpToPx(8).toFloat()
                 setCardBackgroundColor(
-                    if (result.isCorrect) "#E6F4EA".toColorInt()
-                    else "#FCE8E6".toColorInt()
+                    if (result.isCorrect) resources.getColor(R.color.green_500)
+                    else resources.getColor(R.color.red_700)
                 )
             }
 
@@ -48,25 +45,20 @@ class ResultActivity : AppCompatActivity() {
 
             val questionText = TextView(this).apply {
                 text = getString(R.string.result_question, getLocalized(result.question.prompt))
-                setTypeface(null, Typeface.BOLD)
-                setTextColor(Color.BLACK)
             }
 
             val userAnswer = TextView(this).apply {
                 text = getString(R.string.result_your_answer, formatAnswer(result.userAnswer))
-                setTextColor(Color.DKGRAY)
             }
 
             val correctAnswer = TextView(this).apply {
                 text = getString(R.string.result_correct_answer, formatAnswer(result.question.correctAnswer))
-                setTextColor(Color.DKGRAY)
             }
 
             val correctness = TextView(this).apply {
                 text = if (result.isCorrect) getString(R.string.result_correct)
                 else getString(R.string.result_incorrect)
-                setTextColor(if (result.isCorrect) Color.GREEN else Color.RED)
-                setTypeface(null, Typeface.BOLD)
+                setTextColor(if (result.isCorrect) resources.getColor(R.color.green_200) else resources.getColor(R.color.red_200))
             }
 
             cardContent.apply {

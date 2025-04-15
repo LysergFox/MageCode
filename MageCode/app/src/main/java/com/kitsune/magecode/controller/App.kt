@@ -35,8 +35,20 @@ class App : Application() {
 
         db.collection("users").document(uid).get()
             .addOnSuccessListener { doc ->
-                doc.toObject(Account::class.java)?.let {
-                    currentUser = it
+                doc.toObject(Account::class.java)?.let { originalUser ->
+                    var user = originalUser
+
+                    val now = System.currentTimeMillis()
+                    val lastActive = user.lastActive.time
+                    val dayDiff = ((now - lastActive) / (1000 * 60 * 60 * 24)).toInt()
+
+                    if (dayDiff > 1) {
+                        user = user.copy(streak = 0)
+                        db.collection("users").document(uid)
+                            .update("streak", 0)
+                    }
+
+                    currentUser = user
                     onComplete()
                 }
             }

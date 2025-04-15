@@ -32,7 +32,7 @@ class MultipleChoiceView(
         }
         addView(prompt)
 
-        question.options.forEach { optionKey ->
+        question.options.shuffled().forEach { optionKey ->
             val button = Button(context).apply {
                 text = getLocalizedString(optionKey)
                 tag = optionKey

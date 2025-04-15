@@ -3,7 +3,9 @@
     android:id="@+id/resultScroll"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="@drawable/lesson_background"
+    android:theme="@style/Theme.MageCode">
 
     <LinearLayout
         android:id="@+id/results_container"

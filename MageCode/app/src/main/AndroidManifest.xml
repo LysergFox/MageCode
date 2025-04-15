@@ -26,6 +26,7 @@
         <activity android:name=".view.activities.LessonActivity" android:theme="@style/Theme.MageCode"/>
         <activity android:name=".view.activities.ResultActivity" android:theme="@style/Theme.MageCode"/>
         <activity android:name=".view.activities.ScoreboardActivity" android:theme="@style/Theme.MageCode"/>
+        <activity android:name=".view.activities.LessonResultActivity" android:theme="@style/Theme.MageCode"/>
         <activity android:name=".view.activities.WebViewActivity" />
         <meta-data
             android:name="com.google.android.gms.auth.api.signin.v2.CLIENT_ID"

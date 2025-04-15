@@ -7,7 +7,6 @@ import android.graphics.Color
 import android.view.DragEvent
 import android.view.Gravity
 import android.widget.*
-import androidx.core.graphics.toColorInt
 import com.kitsune.magecode.R
 import com.kitsune.magecode.controller.QuestionController
 import com.kitsune.magecode.model.lesson.Question
@@ -55,8 +54,7 @@ class DragOrderView(
         }
         optionsLayout.setOnDragListener(createDropListener(optionsLayout))
 
-        // Render the options
-        question.options.forEach { key ->
+        question.options.shuffled().forEach { key ->
             val localized = getStringByKey(key)
             keyMap[localized] = key
             val view = createDraggableText(localized)

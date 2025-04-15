@@ -59,4 +59,8 @@
     <string name="lesson_completed">Lekce dokončena!</string>
     <string name="scoreboard">Žebříček</string>
     <string name="streak">Streak</string>
+    <string name="correct_answers">Správné odpovědi: %1$d</string>
+    <string name="earned_xp">Získané XP: %1$d</string>
+    <string name="current_level">Aktuální Level: %1$d</string>
+    <string name="streak_count">Streak: %1$d</string>
 </resources>

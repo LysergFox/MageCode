@@ -1,5 +1,6 @@
 package com.kitsune.magecode.view.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.FrameLayout
@@ -46,8 +47,30 @@ class LessonActivity : AppCompatActivity() {
     }
 
     private fun finishLesson() {
-        CustomComponents.showStoneToast(this, getString(R.string.lesson_completed))
-        finish()
+        val results = com.kitsune.magecode.model.managers.ResultManager.getSavedResults(this)
+        val correctCount = results.count { it.isCorrect }
+        val earnedXp = correctCount * 9
+
+        App.instance.userRepo.updateAfterLesson(
+            earnedXp = earnedXp,
+            onSuccess = {
+                val newTotalXp = App.instance.currentUser.xp + earnedXp
+                val newLevel = (newTotalXp / 100) + 1
+                val updatedStreak = App.instance.currentUser.streak + 1
+
+                val intent = Intent(this, LessonResultActivity::class.java).apply {
+                    putExtra("correctCount", correctCount)
+                    putExtra("earnedXp", earnedXp)
+                    putExtra("newLevel", newLevel)
+                    putExtra("updatedStreak", updatedStreak)
+                }
+                startActivity(intent)
+                finish()
+            },
+            onFailure = {
+                CustomComponents.showStoneToast(this, "Failed to update account: $it")
+            }
+        )
     }
 }
 

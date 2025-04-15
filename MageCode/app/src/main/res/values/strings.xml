@@ -59,4 +59,8 @@
     <string name="lesson_completed">Lesson Complete!</string>
     <string name="scoreboard">Scoreboard</string>
     <string name="streak">Streak</string>
+    <string name="correct_answers">Correct Answers: %1$d</string>
+    <string name="earned_xp">Earned XP: %1$d</string>
+    <string name="current_level">Current Level: %1$d</string>
+    <string name="streak_count">Streak: %1$d</string>
 </resources>
