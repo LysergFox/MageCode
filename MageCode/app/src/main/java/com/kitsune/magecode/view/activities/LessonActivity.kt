@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.FrameLayout
+import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
 import com.kitsune.magecode.R
 import com.kitsune.magecode.controller.App
@@ -20,6 +21,15 @@ class LessonActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_lesson)
+
+        onBackPressedDispatcher.addCallback(this) {
+            // Do nothing to disable back gesture
+        }
+
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.Q) {
+            val exclusionZone = android.graphics.Rect(0, 0, 300, resources.displayMetrics.heightPixels)
+            window.decorView.systemGestureExclusionRects = listOf(exclusionZone)
+        }
 
         questions = App.instance.todayLesson.questions
 

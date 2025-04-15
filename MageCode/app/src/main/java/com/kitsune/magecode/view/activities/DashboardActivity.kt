@@ -123,9 +123,32 @@ class DashboardActivity : AppCompatActivity() {
             )
         }
 
-        pythonCheck?.setOnCheckedChangeListener { _, _ -> saveSelection() }
-        javaCheck?.setOnCheckedChangeListener { _, _ -> saveSelection() }
-        sqlCheck?.setOnCheckedChangeListener { _, _ -> saveSelection() }
+        pythonCheck?.setOnCheckedChangeListener { _, _ ->
+            if (!atLeastOneLanguageChecked(pythonCheck, javaCheck, sqlCheck)) {
+                pythonCheck.isChecked = true
+                CustomComponents.showStoneToast(this, getString(R.string.must_select_language))
+            } else {
+                saveSelection()
+            }
+        }
+
+        javaCheck?.setOnCheckedChangeListener { _, _ ->
+            if (!atLeastOneLanguageChecked(pythonCheck, javaCheck, sqlCheck)) {
+                javaCheck.isChecked = true
+                CustomComponents.showStoneToast(this, getString(R.string.must_select_language))
+            } else {
+                saveSelection()
+            }
+        }
+
+        sqlCheck?.setOnCheckedChangeListener { _, _ ->
+            if (!atLeastOneLanguageChecked(pythonCheck, javaCheck, sqlCheck)) {
+                sqlCheck.isChecked = true
+                CustomComponents.showStoneToast(this, getString(R.string.must_select_language))
+            } else {
+                saveSelection()
+            }
+        }
 
         navView.itemIconTintList = null;
 
@@ -199,6 +222,10 @@ class DashboardActivity : AppCompatActivity() {
         val viewResultsBtn = findViewById<Button>(R.id.view_results_btn)
         val hasResults = ResultManager.getSavedResults(this).isNotEmpty()
         viewResultsBtn.visibility = if (hasResults) View.VISIBLE else View.GONE
+    }
+
+    private fun atLeastOneLanguageChecked(vararg checkBoxes: CheckBox?): Boolean {
+        return checkBoxes.any { it?.isChecked == true }
     }
 }
 

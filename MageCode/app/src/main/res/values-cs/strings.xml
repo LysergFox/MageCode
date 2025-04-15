@@ -63,4 +63,5 @@
     <string name="earned_xp">Získané XP: %1$d</string>
     <string name="current_level">Aktuální Level: %1$d</string>
     <string name="streak_count">Streak: %1$d</string>
+    <string name="must_select_language">Musíte vybrat alespoň jeden jazyk.</string>
 </resources>

@@ -63,4 +63,5 @@
     <string name="earned_xp">Earned XP: %1$d</string>
     <string name="current_level">Current Level: %1$d</string>
     <string name="streak_count">Streak: %1$d</string>
+    <string name="must_select_language">You must select at least one language</string>
 </resources>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+
     <uses-permission android:name="android.permission.INTERNET" />
     <application
         android:name=".controller.App"
@@ -9,25 +10,49 @@
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:localeConfig="@xml/locales_config"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.MageCode"
-        android:localeConfig="@xml/locales_config"
-        >
-        <activity android:name=".view.activities.LoginActivity"
-            android:theme="@style/Theme.MageCode"
-            android:exported="true">
+        android:theme="@style/Theme.MageCode">
+        <activity
+            android:name=".view.activities.LoginActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.MageCode">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.activities.DashboardActivity" android:theme="@style/Theme.MageCode"/>
-        <activity android:name=".view.activities.LessonActivity" android:theme="@style/Theme.MageCode"/>
-        <activity android:name=".view.activities.ResultActivity" android:theme="@style/Theme.MageCode"/>
-        <activity android:name=".view.activities.ScoreboardActivity" android:theme="@style/Theme.MageCode"/>
-        <activity android:name=".view.activities.LessonResultActivity" android:theme="@style/Theme.MageCode"/>
-        <activity android:name=".view.activities.WebViewActivity" />
+        <activity
+            android:name=".view.activities.DashboardActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.MageCode" />
+        <activity
+            android:name=".view.activities.LessonActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.MageCode" />
+        <activity
+            android:name=".view.activities.ResultActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.MageCode" />
+        <activity
+            android:name=".view.activities.ScoreboardActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.MageCode" />
+        <activity
+            android:name=".view.activities.LessonResultActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.MageCode" />
+        <activity
+            android:name=".view.activities.WebViewActivity"
+            android:screenOrientation="portrait" />
+
         <meta-data
             android:name="com.google.android.gms.auth.api.signin.v2.CLIENT_ID"
             android:value="@string/default_web_client_id" />
